@@ -1,0 +1,121 @@
+VERSION ""
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SGREL_
+    BU_EVREL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU BMS INV OBC IMD TELEMETRY HMI
+
+BO_ 256 VCU_Heartbeat_State: 8 VCU
+ SG_ VCU_State : 0|8@1+ (1,0) [0|5] "" Vector__XXX
+ SG_ VCU_FaultCode : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ VCU_DriveMode : 24|8@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ VCU_RollingCounter : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ VCU_BrakePressed : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_ReadyToDrive : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 257 VCU_Torque_Command: 8 VCU
+ SG_ VCU_TargetTorque_Nm : 0|16@1- (0.1,0) [-500|500] "Nm" INV
+ SG_ VCU_InverterEnable : 16|1@1+ (1,0) [0|1] "" INV
+ SG_ VCU_DirectionForward : 17|1@1+ (1,0) [0|1] "" INV
+ SG_ VCU_RegenAllowed : 18|1@1+ (1,0) [0|1] "" INV
+ SG_ VCU_MaxSpeed_RPM : 24|16@1+ (1,0) [0|12000] "RPM" INV
+
+BO_ 258 VCU_Aux_Status: 8 VCU
+ SG_ VCU_CoolingPump_PWM : 0|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_RadiatorFan_PWM : 8|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_HeadlightsOn : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_BrakeLightsOn : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_PrechargeRelayStatus : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_MainPosContactor : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_MainNegContactor : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 512 BMS_Pack_Status: 8 BMS
+ SG_ BMS_PackVoltage_V : 0|16@1+ (0.1,0) [0|600] "V" VCU,HMI,TELEMETRY
+ SG_ BMS_PackCurrent_A : 16|16@1- (0.1,0) [-500|500] "A" VCU,HMI,TELEMETRY
+ SG_ BMS_SOC_Percent : 32|8@1+ (0.5,0) [0|100] "%" VCU,HMI,TELEMETRY
+ SG_ BMS_SOH_Percent : 40|8@1+ (0.5,0) [0|100] "%" VCU,HMI,TELEMETRY
+ SG_ BMS_ContactorReq : 48|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_FaultLevel : 49|3@1+ (1,0) [0|7] "" VCU
+
+BO_ 513 BMS_Limits_Alarms: 8 BMS
+ SG_ BMS_MaxDischargeCurrent_A : 0|16@1+ (0.1,0) [0|600] "A" VCU,INV
+ SG_ BMS_MaxChargeCurrent_A : 16|16@1+ (0.1,0) [0|300] "A" VCU,OBC
+ SG_ BMS_OverVoltageAlarm : 32|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_UnderVoltageAlarm : 33|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_OverTempAlarm : 34|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_UnderTempAlarm : 35|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_BalancingActive : 36|1@1+ (1,0) [0|1] "" VCU
+
+BO_ 514 BMS_Cell_Extremes: 8 BMS
+ SG_ BMS_CellMinVoltage_mV : 0|16@1+ (1,0) [0|5000] "mV" TELEMETRY
+ SG_ BMS_CellMaxVoltage_mV : 16|16@1+ (1,0) [0|5000] "mV" TELEMETRY
+ SG_ BMS_TempMin_C : 32|8@1- (1,0) [-40|120] "C" TELEMETRY
+ SG_ BMS_TempMax_C : 40|8@1- (1,0) [-40|120] "C" TELEMETRY
+ SG_ BMS_CellMinId : 48|8@1+ (1,0) [1|64] "" TELEMETRY
+ SG_ BMS_CellMaxId : 56|8@1+ (1,0) [1|64] "" TELEMETRY
+
+BO_ 768 INV_Motor_Feedback: 8 INV
+ SG_ INV_MotorSpeed_RPM : 0|16@1- (1,0) [-12000|12000] "RPM" VCU,HMI,TELEMETRY
+ SG_ INV_ActualTorque_Nm : 16|16@1- (0.1,0) [-500|500] "Nm" VCU,HMI,TELEMETRY
+ SG_ INV_DcBusVoltage_V : 32|16@1+ (0.1,0) [0|600] "V" VCU,TELEMETRY
+ SG_ INV_DcBusCurrent_A : 48|16@1- (0.1,0) [-500|500] "A" VCU,TELEMETRY
+
+BO_ 769 INV_Thermal_Status: 8 INV
+ SG_ INV_InverterTemp_C : 0|8@1- (1,0) [-40|150] "C" VCU,TELEMETRY
+ SG_ INV_MotorTemp_C : 8|8@1- (1,0) [-40|200] "C" VCU,TELEMETRY
+ SG_ INV_FaultFlags : 16|16@1+ (1,0) [0|65535] "" VCU
+ SG_ INV_DeratingActive : 32|1@1+ (1,0) [0|1] "" VCU
+
+BO_ 770 ABS_TCS_Status: 8 INV
+ SG_ ABS_WheelSlip_Ratio_pct : 0|8@1+ (0.5,0) [0|100] "%" VCU,HMI
+ SG_ ABS_Active : 8|1@1+ (1,0) [0|1] "" VCU,HMI
+ SG_ TCS_Active : 9|1@1+ (1,0) [0|1] "" VCU,HMI
+ SG_ ABS_TorqueReduction_pct : 16|8@1+ (1,0) [0|100] "%" VCU
+
+BO_ 1024 OBC_Status_Control: 8 OBC
+ SG_ OBC_AcPresent : 0|1@1+ (1,0) [0|1] "" VCU,HMI
+ SG_ OBC_PilotCurrentLimit_A : 8|8@1+ (1,0) [0|63] "A" VCU,BMS
+ SG_ OBC_OutputVoltage_V : 16|16@1+ (0.1,0) [0|600] "V" BMS
+ SG_ OBC_OutputCurrent_A : 32|16@1+ (0.1,0) [0|100] "A" BMS
+ SG_ OBC_ChargingState : 48|8@1+ (1,0) [0|5] "" VCU,HMI
+
+BO_ 1104 IMD_Status: 8 IMD
+ SG_ IMD_Insulation_kOhm : 0|16@1+ (1,0) [0|65535] "kOhm" VCU,HMI,TELEMETRY
+ SG_ IMD_StatusFlag : 16|8@1+ (1,0) [0|255] "" VCU,HMI
+ SG_ IMD_IsolationFault : 24|1@1+ (1,0) [0|1] "" VCU,HMI
+
+CM_ BO_ 256 "VCU Durum ve Kalp Atisi Mesaji";
+CM_ BO_ 257 "VCU Motor Tork ve Surus Komut Mesaji";
+CM_ BO_ 512 "BMS Batarya Paketi Temel Durum Bilgisi";
+CM_ BO_ 768 "Invertor Motor Geri Bildirim ve Hiz Mesaji";
+CM_ BO_ 1024 "OBC Yerlesik Sarj Cihazi Durumu";
+CM_ BO_ 1104 "Bender IR155 Izolasyon Izleme Mesaji";
